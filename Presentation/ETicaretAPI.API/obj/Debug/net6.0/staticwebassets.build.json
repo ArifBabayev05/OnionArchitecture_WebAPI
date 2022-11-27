@@ -1,0 +1,19 @@
+{
+  "Version": 1,
+  "Hash": "zKtQNf6vacYexUrg6kfW/Ek2C0Raox1iksqEhx3bGX4=",
+  "Source": "ETicaretAPI.API",
+  "BasePath": "_content/ETicaretAPI.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "ETicaretAPI.API/wwwroot",
+      "Source": "ETicaretAPI.API",
+      "ContentRoot": "/Users/imac/Desktop/ETicaretAPI/Presentation/ETicaretAPI.API/wwwroot/",
+      "BasePath": "_content/ETicaretAPI.API",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": []
+}

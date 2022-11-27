@@ -23,4 +23,10 @@
     <ProjectReference Include="..\..\Core\ETicaretAPI.Application\ETicaretAPI.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Concretes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Concretes\" />
+  </ItemGroup>
 </Project>

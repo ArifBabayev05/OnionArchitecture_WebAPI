@@ -13,6 +13,7 @@
     <EmbeddedResource Remove="wwwroot\resource\**" />
     <None Remove="wwwroot\resource\**" />
     <Content Remove="wwwroot\photo-images\" />
+    <None Remove="Controllers\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,6 +39,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\NewFolder\" />
     <Folder Include="wwwroot\photo-images\" />
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>
