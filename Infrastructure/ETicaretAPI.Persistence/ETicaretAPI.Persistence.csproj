@@ -24,9 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Concretes\" />
+    <None Remove="Contexts\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Concretes\" />
+    <Folder Include="Contexts\" />
   </ItemGroup>
 </Project>
