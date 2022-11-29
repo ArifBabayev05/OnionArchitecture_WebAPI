@@ -1,6 +1,7 @@
 ﻿using System;
-using ETicaretAPI.Application.Abstraction;
+using ETicaretAPI.Application.Repositories;
 using ETicaretAPI.Persistence.Contexts;
+using ETicaretAPI.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 //using ETicaretAPI.Persistence.Concretes;
@@ -16,9 +17,17 @@ namespace ETicaretAPI.Persistence
 
 			// Download the package about which Database will you use.
 			// Example for Azure-SQL --> EntityCore.SqlServer
-			// For Postgre-SQL --> EfCore.PostgreSQL or etc.
+			// For Postgre-SQL --> EfCore.PostgreSQL or etc. 
 
-			services.AddDbContext<ETicaretDbContext>(options => options.UseNpgsql(Configuartion.ConnectionString));
-		}
-	};
+			services.AddDbContext<ETicaretDbContext>(options  => options.UseNpgsql(Configuartion.ConnectionString), ServiceLifetime.Singleton);
+			services.AddSingleton<ICustomerReadRepository, CustomerReadRepository>();
+            services.AddSingleton<ICustomerWriteRepository, CustomerWriteRepository>();
+					 
+            services.AddSingleton<IOrderReadRepository, OrderReadRepository>();
+            services.AddSingleton<IOrderWriteRepository, OrderWriteRepository>();
+					 
+            services.AddSingleton<IProductReadRepository, ProductReadRepository>();
+            services.AddSingleton<IProductWriteRepository, ProductWriteRepository>();
+        }
+    };
 } 
