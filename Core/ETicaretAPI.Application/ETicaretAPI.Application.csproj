@@ -21,9 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Abstraction\" />
+    <None Remove="Repositories\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Abstraction\" />
+    <Folder Include="Repositories\" />
   </ItemGroup>
 </Project>
