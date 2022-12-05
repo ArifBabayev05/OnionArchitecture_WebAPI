@@ -7,13 +7,19 @@ namespace ETicaretAPI.Application.Repositories
 	public interface IReadRepository<T> : IRepository<T>
 		where T : BaseEntity
     {
-		IQueryable<T> GetAll();
 
-		IQueryable<T> GetWhere(Expression<Func<T, bool>> method);
+        //Tracking nedir?
+        //Tracking nedir? --> Database üzerinde yapılan işlemlerin EF tarafından haberdar olması için Tracking sistemi
+        // vardır. Lakin biz Get Methodu ile datalarda bi değişiklik yapmayıp, onları sadece sunuma hazırladığımızda
+        // tracking'e ihtiyacımız kalmaz. Ekstra maliyet oluşmaması için AsNoTracking kullanılır.
 
-		Task<T> GetSingleAsync(Expression<Func<T, bool>> method);
+        IQueryable<T> GetAll(bool tracking = true);
 
-        Task<T> GetByIdAsync(string id);
+		IQueryable<T> GetWhere(Expression<Func<T, bool>> method, bool tracking = true);
+
+		Task<T> GetSingleAsync(Expression<Func<T, bool>> method, bool tracking = true);
+
+        Task<T> GetByIdAsync(string id, bool tracking = true);
 	}
 }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ETicaretAPI.Application.Repositories;
+using ETicaretAPI.Domain.Entities;
 using ETicaretAPI.Persistence.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,32 +19,46 @@ namespace ETicaretAPI.API.Controllers
         private readonly IProductWriteRepository _productServiceWrite;
 
 
-        public ProductsController(IProductReadRepository productServiceRead, IProductWriteRepository productServiceWrite)
+        private readonly IOrderReadRepository _orderServiceRead;
+        private readonly IOrderWriteRepository _orderServiceWrite;
+
+        private readonly ICustomerWriteRepository _customerWriteRepository;
+
+
+        public ProductsController(IProductReadRepository productServiceRead,
+                                  IProductWriteRepository productServiceWrite,
+                                  IOrderReadRepository orderServiceRead,
+                                  IOrderWriteRepository orderServiceWrite,
+                                  ICustomerWriteRepository customerWriteRepository)
         {
             _productServiceRead = productServiceRead;
             _productServiceWrite = productServiceWrite;
+            _orderServiceRead = orderServiceRead;
+            _orderServiceWrite = orderServiceWrite;
+            _customerWriteRepository = customerWriteRepository;
         }
-        
-        
+
+
 
         [HttpGet]
-        public async void GetProducts()
+        public async Task<IActionResult> GetProducts()
         {
-            await _productServiceWrite.AddRangeAsync(new()
-            {
-                new()
-                {
-                    Id = Guid.NewGuid(),
-                    Name = "Product 1",
-                    Price = 300,
-                    CreatedDate = DateTime.UtcNow,
-                    Stock = 10
-                }
-            });
-            await _productServiceWrite.SaveAsync();
-            
+            var customerId = Guid.NewGuid();
+            await _customerWriteRepository.AddAsync(new() { Id = customerId, Name ="Tom" });
+            await _orderServiceWrite.AddAsync(new() { Description = "CJZ", Address= "TEst",CustomerId = customerId });
+            await _orderServiceWrite.SaveAsync();
+            return Ok(_orderServiceWrite.Table);
         }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(string id)
+        {
+            Order order = await _orderServiceRead.GetByIdAsync("2");
+            order.Address = "Sumg";
+            await _orderServiceWrite.SaveAsync();
+            return Ok(order);
+
         
+        }
 
     }
 }
